@@ -17,8 +17,9 @@ classdef LinOpPBTShift <  LinOp
     
     %%    Copyright (C)
     %     2018 - Biomedical Imaging Group, EPFL
-    %	  Masih Nilchian - masih.nilchian@epfl.ch
-    %	  Laurène Donati - laurene.donati@epfl.ch
+    %	    Masih Nilchian - masih.nilchian@epfl.ch
+    %	    Laurène Donati - laurene.donati@epfl.ch
+    %     Citation:  Fast Multiresolution Reconstruction for Cryo-EM, Donati et al.
     %
     %     This program is free software: you can redistribute it and/or modify
     %     it under the terms of the GNU General Public License as published by
@@ -32,13 +33,6 @@ classdef LinOpPBTShift <  LinOp
     %
     %     You should have received a copy of the GNU General Public License
     %     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-%%    Copyright (C) 
-%     2018 - Biomedical Imaging Group, EPFL
-%     Masih Nilchian - masih.nilchian@epfl.ch	
-%     Laurène Donati - laurene.donati@epfl.ch
-%     Slightly modified by Mona Zehni to accomodate in-plane translations
-%     Citation:  Fast Multiresolution Reconstruction for Cryo-EM, Donati et al.
     
     % Protected Set and public Read properties
     properties (SetAccess = protected,GetAccess = public)
