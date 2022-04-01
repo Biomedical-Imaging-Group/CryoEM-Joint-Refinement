@@ -19,11 +19,7 @@ https://biomedical-imaging-group.github.io/GlobalBioIm/index.html
 
 ### User manual
 - Run `RunMe.m` to add the paths of all folders and required libraries.
-- Run `./experiments/main.m`. You can change the dataset and the parameters of the experiments.
-
-### Quick demo
-For a quick demo, we try two small volumes of size 44 x 44 x 44. In this demo experiment, we consider high SNR and use 200 projection images. 
-
+- Run `./experiments/main.m` or `./experiments/demo.m`. You can change the dataset and the parameters of the experiments.
 
 ### Citation
 If you find this repositry helpful in your publications, please consider citing the following papers:
