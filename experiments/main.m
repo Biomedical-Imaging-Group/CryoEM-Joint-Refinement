@@ -5,7 +5,7 @@ rng(1);
 
 %% loading the required parameters
 param_exp;
-num_samples = 200; % # of projs
+num_samples = 5000; % # of projs
 
 %% optimization setting and definition
 optim_config;
@@ -13,12 +13,6 @@ optim_config;
 % generating the volume
 vol_name = 'emd_3400';
 vol_gt = prepare_volume(vol_name, 1);
-vol_gt = imgaussfilt3(vol_gt, 1);
-vol_gt = vol_gt(1:2:end, 1:2:end, 1:2:end);
-% vol_gt = center_vol(26, vol_gt);
-tt = zeros(46, 46, 46);
-tt(1:45, 1:45, 1:45) = vol_gt;
-vol_gt = tt;
 vol_sz = size(vol_gt, 1);
 
 [vol_coeff, vol_est, kbwf_kernel] = expand_vol_KBWF(vol_gt, kbwf_proj);
@@ -41,7 +35,7 @@ sigma_angle = 0.7;
 %% generating the forward model and other operators
 H = LinOpPBTShift(size(vol_coeff), angles, shifts, 1, kbwf_proj);
 y_clean = H.apply(vol_coeff);
-y = y_clean + 0 * sigma_noise(sig_noise_index) * randn(size(y_clean));
+y = y_clean + sigma_noise(sig_noise_index) * randn(size(y_clean));
 size_im = [size(y,1),size(y,2)];
 
 % define operators
@@ -70,7 +64,6 @@ if known_angle
     H_true = LinOpPBTShift(size(vol_coeff), angles, shifts, 0, kbwf_recon);
     [vol_coeff_true, snr_true_evol, iter_true_evol, vol_true_recon_iter] = ...
         ADMM_solver(10, LS*H_true, Fn, Hn, [rho_n_final,10000], zeros(size(vol_coeff)), vol_coeff_init, 1); % vol_init
-    projs2 = H_true.apply(vol_coeff_init);
     vol_true = convn(vol_coeff_true, kbwf_recon_kernel, 'same');
     plot_vol_results(vol_gt, vol_true, 'GT volume', 'Recon. volume')
 end
@@ -80,22 +73,14 @@ if approx_angle
     H_approx = LinOpPBTShift(size(vol_coeff), angles_init, shifts_init, 0, kbwf_recon);
     [vol_coeff_approx, snr_approx_evol, iter_approx_evol, vol_approx_recon_iter] = ...
         ADMM_solver(20, LS*H_approx, Fn, Hn, [rho_n_final,10000], vol_coeff, vol_coeff_init, 1);
-    projs2 = H_approx.apply(vol_coeff_approx);
     vol_approx = convn(vol_coeff_approx, kbwf_recon_kernel, 'same');
     plot_vol_results(vol_gt, vol_approx, 'GT volume', 'Recon. volume')
 end
 
 %% joint optimization of the volume and the angles
-H = LinOpPBTShift(size(vol_init), angles, shifts, 0, kbwf_recon);
-Fn = {0.2*R1, R_pos};
-[vol_recon, SNR_tmp, fval_tmp, iternum_tmp] = ...
-    recon_3D_ADMM(LS, H, Fn, Hn, [100,1e3], zeros(size(vol_init)), vol_coeff_init, 10);
 if joint_angle_vol
     vol_mask = ones(size(vol_gt));
     struct_params;
     [ vol_rec_final, angles_rec_iter, shifts_rec_iter, final_SNR_iter, vol_recon_cell, ~, ~] ...
         = alternating_angle_vol2(params);
-%      max_iter, vol_init, angles_init, shifts_init,...
-%         y, LS, R1, rho_n_init, rho_n_final, max_iter_ADMM, grad_num, grad_step_rot, grad_step_tilt, grad_step_shift, ...
-%         alpha, beta, num_scale_stages, vol, lamb1_init, lamb1_final, vol_mask, 1, angles, shifts
 end
