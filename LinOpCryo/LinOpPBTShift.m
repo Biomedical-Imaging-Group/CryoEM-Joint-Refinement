@@ -37,7 +37,7 @@ classdef LinOpPBTShift <  LinOp
 %     2018 - Biomedical Imaging Group, EPFL
 %     Masih Nilchian - masih.nilchian@epfl.ch	
 %     Laurène Donati - laurene.donati@epfl.ch
-%     Modified by Mona Zehni to accomodate in-plane translations
+%     Slightly modified by Mona Zehni to accomodate in-plane translations
 %     Citation:  Fast Multiresolution Reconstruction for Cryo-EM, Donati et al.
     
     % Protected Set and public Read properties
