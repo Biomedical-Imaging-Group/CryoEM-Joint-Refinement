@@ -1,2 +1,5 @@
 .idea
 interm_res/
+./experiments/.DS_Store
+./functions/.DS_Store
+./LinOpCryo/.DS_Store
