@@ -29,5 +29,5 @@ addpath(genpath([currPath '/LinOpCryo/functions_opt']))
 
 % create folder to save intermediate results
 if ~isfolder('./interm_res')
-       mkdir('./interm_res/')
+	mkdir('./interm_res/')
 end

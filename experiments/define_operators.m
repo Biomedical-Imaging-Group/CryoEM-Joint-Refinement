@@ -12,5 +12,4 @@ lamb1_init  = scale1_lamb_init(sig_noise_index)/50; %/1
 rho_n_final = scale1_rho_final(sig_noise_index)/50;
 lamb1_final  = scale1_lamb_final(sig_noise_index)/500;
 
-%% oracle baseline: true angles are known
 Fn = {lamb1_final*R1, R_pos};

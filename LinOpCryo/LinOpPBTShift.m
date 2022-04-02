@@ -17,8 +17,8 @@ classdef LinOpPBTShift <  LinOp
     
     %%    Copyright (C)
     %     2018 - Biomedical Imaging Group, EPFL
-    %	    Masih Nilchian - masih.nilchian@epfl.ch
-    %	    Laurène Donati - laurene.donati@epfl.ch
+    %	  Masih Nilchian - masih.nilchian@epfl.ch
+    %	  Laurène Donati - laurene.donati@epfl.ch
     %     Citation:  Fast Multiresolution Reconstruction for Cryo-EM, Donati et al.
     %
     %     This program is free software: you can redistribute it and/or modify
@@ -96,7 +96,6 @@ classdef LinOpPBTShift <  LinOp
                 this.sizeout(1) = this.sizeout(1)+1;
                 this.sizeout(2) = this.sizeout(2)+1;
             end
-            %this.sizeout = [p, p, size(angles, 1)];
             if (mod(this.sizeout(1),2)~=0)
                 this.sizeout(1) = this.sizeout(1)+1;
                 this.sizeout(2) = this.sizeout(2)+1;
@@ -110,16 +109,16 @@ classdef LinOpPBTShift <  LinOp
     methods (Access = protected)
         function y = apply_(this,x)
             % Reimplemented from parent class :class:`Cost`.
-            
             % COMPUTE PROJECTIONS (WITH MULTI-THREAD MEX FILE)
-            y = projectionShift3DMT2_buu(x, this.param.r1, this.param.r2, this.param.scaleRatio*[1,1,1]*this.Ti, ...
+            y = projectionShift3DMT2(x, this.param.r1, this.param.r2, this.param.scaleRatio*[1,1,1]*this.Ti, ...
                 [1,1]*this.Tp, this.lt, this.param.a, this.param.shifts(:,1), this.param.shifts(:,2));
 
         end
+        
         function y = applyAdjoint_(this,x)
             % Reimplemented from parent class :class:`Cost`.            
             % COMPUTE HTG
-            y = projectionAdjointShift3DMT_bu(x, [this.param.k1; this.param.k2; this.param.k3],...
+            y = projectionAdjointShift3DMT(x, [this.param.k1; this.param.k2; this.param.k3],...
                 this.param.r1, this.param.r2, this.param.scaleRatio*[1,1,1]*this.Ti,...
                 [1,1]*this.Tp, this.lt, this.param.a, this.param.shifts(:,1), this.param.shifts(:,2));
         end
@@ -130,9 +129,9 @@ classdef LinOpPBTShift <  LinOp
             % crop the region of interest
             y = y(1:this.sizein(1),1:this.sizein(2),1:this.sizein(3));
         end
+        
         function M = makeHtH_(this)
             % Reimplemented from parent class :class:`LinOp`.
-            % the original one
             S=LinOpSelectorPatch(this.sizein*2-1,[1 1 1],this.sizein);
             H = LinOpConv(this.kernel);
             M = S*H*S';

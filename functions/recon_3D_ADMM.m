@@ -23,7 +23,7 @@ function [vol, final_SNR, final_fval, final_iternum] = ...
 % eps_rel = 2e-3;
 
 ADMM=OptiADMM(LS*H,Fn,Hn,rho_n);
-ADMM.OutOp=OutputOpti(0,vol_true,1);
+% ADMM.OutOp=OutputOpti(0,vol_true,1);
 
 ADMM.ItUpOut=1;
 ADMM.maxiter=max_iter; 

@@ -76,7 +76,7 @@ projs = params.projs;
 proj_tmp = projs(1:params.DL_proj:size(projs,1), 1:params.DL_proj:size(projs,2), :);
 proj_batch = zeros(size(proj_tmp,1),size(proj_tmp,2),batch_size,batch_num);
 
-% only during angle update we are downsampling the volume
+% only during angle/shift update we are downsampling the volume
 for b = 1:batch_num
     proj_batch(:,:,:,b) = proj_tmp(:,:,batch_ind(:,b));
 end
@@ -126,7 +126,7 @@ for iter = 1:params.max_iter
             
             % volume update
             % build the operator based on the updated angles and shifts
-            size(angles_init)
+            fprintf('Updating volume...\n')
             H = LinOpPBTShift(size(vol_init), angles_init, shifts_init, 0, kbwf_recon);
             Fn = {lamb*R1, R_pos};
             
@@ -152,16 +152,16 @@ for iter = 1:params.max_iter
         end
         
         if turn_angle==1 && turn_vol==0 && flag<2
-            
+            fprintf('Updating angles/in-plane translations...\n')
             for n = 1:params.grad_num
-                
+                fprintf(['GD iter: ' num2str(n) '\n'])
                 updated_angle_tmp = zeros(batch_size,3,batch_num);
                 updated_shift_tmp = zeros(batch_size,2,batch_num);
                 if isempty(gcp('nocreate'))
                     parpool('local',num_pool);
                 end
                 tic
-                for batch_index = 1:batch_num
+                parfor batch_index = 1:batch_num
                     
                     [updated_angle_tmp(:,:,batch_index), updated_shift_tmp(:,:,batch_index)] = ...
                         angle_shift_update_batch...

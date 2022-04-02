@@ -82,7 +82,6 @@ all_updated_rot = 0;
 iter = 1;
 while all_updated_rot==0
     % applying the gradients over the angles
-	fprintf('hey\n')
     H_angle = LinOpPBTShift(size(vol),...
         [rot_tmp(index)-lr*deriv_rot(index),tilt_tmp(index)-lr*deriv_tilt(index), in_plane_tmp(index)-lr*deriv_in_plane(index)],shifts_init(index,:),proj_only,kbwf_config);
     
