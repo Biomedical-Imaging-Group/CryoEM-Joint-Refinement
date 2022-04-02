@@ -1,5 +1,5 @@
 % plot_angles_shifts
-interm_result_path = './interm_res/';
+interm_result_path = '../interm_res/';
 angle_titles = {'alpha', 'beta', 'gamma'};
 shift_titles = {'x-shift', 'y-shift'};
 
