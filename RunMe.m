@@ -2,7 +2,7 @@
 % NOTE: change the paths accordingly
 
 currPath = pwd;
-basePath = '~/repos/';
+basePath = '~/projects/';
 libPath = [basePath 'lib/'];
 
 % the functions
@@ -28,6 +28,7 @@ addpath(genpath([currPath '/LinOpCryo/functions']))
 addpath(genpath([currPath '/LinOpCryo/functions_opt']))
 
 % create folder to save intermediate results
-if ~isfolder('./interm_res')
+%if ~isfolder('./interm_res') % recent matlab version
+if ~exist('./interm_res', 'dir')
 	mkdir('./interm_res/')
 end
