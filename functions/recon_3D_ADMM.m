@@ -23,14 +23,14 @@ function [vol, final_SNR, final_fval, final_iternum] = ...
 % eps_rel = 2e-3;
 
 ADMM=OptiADMM(LS*H,Fn,Hn,rho_n);
-% ADMM.OutOp=OutputOpti(0,vol_true,1);
+% ADMM.OutOp=OutputOptiSNR(0,vol_true,1);
 
 ADMM.ItUpOut=1;
 ADMM.maxiter=max_iter; 
 ADMM.run(vol_init);  
-vol = ADMM.OutOp.evolxopt{end};
+vol = ADMM.xopt;
 
-final_SNR = ADMM.OutOp.evolsnr;
+final_SNR = 0; %ADMM.OutOp.evolsnr;
 final_fval = ADMM.OutOp.evolcost;
 final_iternum = ADMM.OutOp.iternum;
 

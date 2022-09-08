@@ -42,7 +42,7 @@ ADMM.ItUpOut=50;
 ADMM.maxiter=200; 
 ADMM.run(zeros(size(vol)));
 
-c = ADMM.OutOp.evolxopt{end};
+c = ADMM.xopt;
 c = fftshift(c);
 
 vol_est = convn(c, kbwf, 'same');

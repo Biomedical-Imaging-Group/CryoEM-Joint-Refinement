@@ -110,7 +110,8 @@ classdef LinOpPBTShift <  LinOp
         function y = apply_(this,x)
             % Reimplemented from parent class :class:`Cost`.
             % COMPUTE PROJECTIONS (WITH MULTI-THREAD MEX FILE)
-            y = projectionShift3DMT2(x, this.param.r1, this.param.r2, this.param.scaleRatio*[1,1,1]*this.Ti, ...
+            xx=x;xx(1)=xx(1);
+            y = projectionShift3DMT2(xx, this.param.r1, this.param.r2, this.param.scaleRatio*[1,1,1]*this.Ti, ...
                 [1,1]*this.Tp, this.lt, this.param.a, this.param.shifts(:,1), this.param.shifts(:,2));
 
         end

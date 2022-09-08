@@ -22,15 +22,15 @@ ADMM=OptiADMM(F0,Fn,Hn,rho_n);
 % the SNR should be computed wrt a downsampled version of the volume if the
 % scaling ratio is not one
 % vol_dl = downSample(vol_true, scaleRatio);
-% ADMM.OutOp=OutputOpti(0,vol_dl,1);
+% ADMM.OutOp=OutputOptiSNR(0,vol_dl,1);
 % ADMM.CvOp=TestCvgADMM(eps_abs,eps_rel);
 
 ADMM.ItUpOut=1;             
 ADMM.maxiter=maxIter; 
 ADMM.run(vol_init);
 
-final_vol = ADMM.OutOp.evolxopt{end};
-snr_evol = ADMM.OutOp.evolsnr;
+final_vol = ADMM.xopt;
+snr_evol = 0; %ADMM.OutOp.evolsnr;
 iter_evol = ADMM.OutOp.iternum;
 
 vol_recon_iter = ADMM.OutOp.evolxopt;

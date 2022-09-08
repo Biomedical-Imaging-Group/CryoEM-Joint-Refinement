@@ -1,6 +1,6 @@
 % define the operators
 G = LinOpGrad(size(vol_coeff)); % gradient operator
-R1 = CostL1(G.sizeout, zeros(G.sizeout)); % total variation regularizer
+R1 = CostL1(G.sizeout); % total variation regularizer
 Hn = {G, LinOpIdentity(size(vol_coeff))};
 R_pos = CostNonNeg(size(vol_coeff)); % positivity constraint
 
