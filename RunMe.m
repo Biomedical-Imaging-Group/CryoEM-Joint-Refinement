@@ -2,7 +2,7 @@
 % NOTE: change the paths accordingly
 
 currPath = pwd;
-basePath = '~/projects/';
+basePath = '~/repos/';
 libPath = [basePath 'lib/'];
 
 % the functions
@@ -17,9 +17,13 @@ cd([libPath 'ASPIRE'])
 initpath;
 cd(currPath)
 
-% InvPbLib
-cd([libPath 'InvPbLib'])
-setMatlabPath;
+% v1.0.1 of GlobalBioIm
+% cd([libPath 'GlobalBioIm-1.0.1'])
+% setMatlabPath;
+
+% latest version of GlobalBioIm
+cd([libPath 'GlobalBioIm-master'])
+setGlobalBioImPath
 cd(currPath)
 
 % the LinOpCryo
