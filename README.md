@@ -24,7 +24,7 @@ https://biomedical-imaging-group.github.io/GlobalBioIm/index.html
 ### Compilation of mex files
 - Pre-compiled mex files of projection and adjoint of the projection operators are provided in `./LinOpCryo/functions_opt`.
 - To re-compile these functions, navigate to `./LinOpCryo/mex_files/` and run `mex filename.c -o ../functions_opt/`.
-- To avoid re-writing the provided pre-compiled mex files, the name of the `*.c` files slightly differ from the name of the pre-compiled mex files. Once you run any compilations, make sure the name of the functions being used in `LinOpCryo/LinOpPBTSShift.m` matches your compiled mex files.
+- To avoid re-writing the provided pre-compiled mex files, the name of the `*.c` files slightly differ from the name of the pre-compiled mex files. Once you run any compilations, make sure the name of the functions being used in `LinOpCryo/LinOpPBTShift.m` matches your compiled mex files.
 
 ### Citation
 If you find this repositry helpful in your publications, please consider citing the following papers:
